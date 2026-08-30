@@ -1,0 +1,17 @@
+*** server.js — добавить после существующих app.post('/api/v1/aegis-scan', ...)
++// ==== AEGIS Sentinel Continuous ($299/mo) — x402 Base eip155:8453 ====
++app.post('/api/v1/aegis-subscribe', async (req, res) => {
++  const sig = req.headers['payment-signature'] || req.headers['x-payment-signature'];
++  if (!sig || !/^0x[a-fA-F0-9]{40,400}$/.test(sig)) {
++    return res.status(402).set({
++      'x-payment-amount':'299','x-payment-recipient':'0xDC056FcF4d3442110862E7eA7c02b5E81eAD4B1F',
++      'x-payment-token':'0x036CbD53842c5426634e792a1dCF7187fB630A81','x-payment-chain':'eip155:8453'
++    }).json({error:'payment_required',amount:'299'});
++  }
++  const {address,email} = req.body||{};
++  if (!address) return res.status(400).json({error:'address required'});
++  const sub=`sub_${Date.now().toString(36)}`;
++  // forward to AEGIS webhook if available
++  fetch('https://aegis-sentinel.onrender.com/api/v1/aegis-subscribe',{method:'POST',headers:{'content-type':'application/json','payment-signature':sig},body:JSON.stringify({address,email})}).catch(()=>{});
++  res.json({status:'ok',subscription:sub,plan:'continuous'});
++});

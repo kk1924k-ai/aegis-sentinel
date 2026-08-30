@@ -1,0 +1,13 @@
+*** .well-known/agent.json — добавить в skills[]
++{
++  "id": "aegis-sentinel-continuous",
++  "name": "AEGIS Sentinel Continuous",
++  "description": "Continuous $299/mo hourly scan 1 address — via Koka x402 Base",
++  "price": 29900,
++  "token": "0x036CbD53842c5426634e792a1dCF7187fB630A81",
++  "chain": "eip155:8453",
++  "endpoint": "/api/v1/aegis-subscribe",
++  "method": "POST",
++  "params": {"address":"<address>","email":"<email>"},
++  "timeout": 3600
++}
