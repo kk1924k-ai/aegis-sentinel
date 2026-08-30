@@ -1,0 +1,5 @@
+# Immunefi — Phase 1 (no key needed for mock, real key later)
+mode: "mock"  # mock | live
+poll_interval_sec: 120
+min_reward_usd: 1000
+chains: ["evm","solana"]

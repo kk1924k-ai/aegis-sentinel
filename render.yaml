@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: aegis-sentinel
+    runtime: python
+    region: frankfurt
+    plan: free
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "uvicorn agents.aegis_webhook:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.15"
+      - key: NEVERMINED_MODE
+        value: earning
+      - key: X402_RECIPIENT
+        value: "0xDC056FcF4d3442110862E7eA7c02b5E81eAD4B1F"
+      - key: X402_USDC_BASE
+        value: "0x036CbD53842c5426634e792a1dCF7187fB630A81"
+      - key: X402_CHAIN
+        value: "eip155:8453"
+      - key: KOKA_RAIL_HOST
+        value: "https://nevermined-koka-bot.onrender.com"

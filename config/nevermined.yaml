@@ -1,0 +1,61 @@
+# Koka Bot — Nevermined x402 LIVE — AEGIS Sentinel EARNING MODE
+# Агент НЕ ПЛАТИТ подписки — агент ПОЛУЧАЕТ USDC за сканы
+# Payout идет на Koka кошелек 0xDC05..., withdraw 0x48Fb... (Koka)
+nevermined_wallet_payout: "0xDC056FcF4d3442110862E7eA7c02b5E81eAD4B1F"
+nevermined_wallet_withdraw: "0x48Fb533F5e3537b008bD265dEFD1fe05a0fe9409"
+usdc_token: "0x036CbD53842c5426634e792a1dCF7187fB630A81"
+did: "did:nvm:8453"
+chain: "base"
+chain_id: 8453
+host: "https://nevermined-koka-bot.onrender.com"
+agent_json: "https://nevermined-koka-bot.onrender.com/.well-known/agent.json"
+health_url: "https://nevermined-koka-bot.onrender.com/health"
+gist: "https://gist.github.com/kk1924k-ai/f0acc24d2068278b2201018bf03a50b5"
+
+mode: "earning"  # earning = агент получает USDC, сам ничего не оформляет/не платит
+payment:
+  mechanism: "x402"
+  flow: "402 Payment Required -> 200 OK via payment-signature header"
+  header: "payment-signature"
+  currency: "USDC on Base"
+  usdc_token: "0x036CbD53842c5426634e792a1dCF7187fB630A81"
+  note: "Платит КЛИЕНТ агенту (402->200), агент сам подписки НЕ оформляет"
+
+pricing:
+  pay_per_call:
+    amount: 5
+    token: "USDC"
+    free_trial: 3
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/aegis-scan"
+    note: "Клиент платит $5 USDC агенту за скан — агент зарабатывает"
+  subscription_nft:
+    monthly_usd: 299
+    token: "USDC"
+    duration: "monthly"
+    features: ["continuous-monitoring","realtime-alerts","smt-proof-on-chain","api-priority"]
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/aegis-subscribe"
+    note: "Клиент платит $299/мес агенту — агент зарабатывает, сам ничего не покупает"
+
+gas_vault:
+  note: "gas отдельно — клиент платит USDC через x402, ETH на Base для сдачи держит Koka"
+  thresholds:
+    eth: 0.01
+    usdc: 5
+
+services_existing:
+  - id: "koka-token-analytics"
+    price: "$1.50 USDC"
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/token-analytics"
+    note: "Plan A Koka — зарабатывает $1.50"
+  - id: "koka-superkletka-execut"
+    price: "$5.00 USDC"
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/execute-task"
+    note: "Plan B Koka — зарабатывает $5.00"
+  - id: "aegis-sentinel-scan"
+    price: "$5.00 USDC"
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/aegis-scan"
+    note: "AEGIS — зарабатывает $5 за аудит"
+  - id: "aegis-sentinel-continuous"
+    price: "$299 USDC/month"
+    endpoint: "POST https://nevermined-koka-bot.onrender.com/api/v1/aegis-subscribe"
+    note: "AEGIS — зарабатывает $299/мес"

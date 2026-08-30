@@ -1,0 +1,5 @@
+# Farcaster / Neynar — Phase 1 mock
+farcaster_signer_uuid: "mock"
+neynar_api_key: "mock"
+hub_url: "https://api.neynar.com"
+rate_limit_per_day: 5
