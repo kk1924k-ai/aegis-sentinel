@@ -18,3 +18,5 @@ Both run in mock mode Phase 1, switch to live with API keys.
 from infra.dash_metrics import Dashboard
 d=Dashboard(); d.record_scan("immunefi",85,5000,0.5); d.print()
 ```
+
+# AEGIS webhook rebuild trigger 20260924T2007Z
